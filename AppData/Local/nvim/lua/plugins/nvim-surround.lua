@@ -1,0 +1,31 @@
+return {
+  "kylechui/nvim-surround",
+  event = "LazyFile",
+  keys = {
+    { "<C-g>z", "<Plug>(nvim-surround-insert)", mode = { "i" }, desc = "Add a surrounding pair (cursor)" },
+    { "<C-g>Z", "<Plug>(nvim-surround-insert-line)", mode = { "i" }, desc = "Add a surrounding pair (line)" },
+    { "gz", "<Plug>(nvim-surround-normal)", mode = { "n" }, desc = "Add a surrounding pair" },
+    { "gzz", "<Plug>(nvim-surround-normal-cur)", mode = { "n" }, desc = "Add a surrounding pair (cursor)" },
+    { "gZ", "<Plug>(nvim-surround-normal-line)", mode = { "n" }, desc = "Add a surrounding pair (line)" },
+    { "gZZ", "<Plug>(nvim-surround-normal-cur-line)", mode = { "n" }, desc = "Add a surrounding pair (cursor, line)" },
+    { "gz", "<Plug>(nvim-surround-visual)", mode = { "x" }, desc = "Add a surrounding pair" },
+    { "gZ", "<Plug>(nvim-surround-visual-line)", mode = { "x" }, desc = "Add a surrounding pair (line)" },
+    { "gzd", "<Plug>(nvim-surround-delete)", mode = { "n" }, desc = "Add a surrounding pair" },
+    { "gzc", "<Plug>(nvim-surround-change)", mode = { "n" }, desc = "Add a surrounding pair" },
+    { "gZc", "<Plug>(nvim-surround-change-line)", mode = { "n" }, desc = "Add a surrounding pair (line)" },
+  },
+  opts = {
+    keymaps = {
+      insert = false,
+      insert_line = false,
+      normal = false,
+      normal_cur = false,
+      normal_line = false,
+      normal_cur_line = false,
+      visual = false,
+      visual_line = false,
+      delete = false,
+      change = false,
+    },
+  },
+}
