@@ -5,4 +5,5 @@ Documents/WindowsPowerShell/**/*
 
 {{ if ne .chezmoi.os "linux" }}
 .p10k.zsh
+.zshrc
 {{ end }}
