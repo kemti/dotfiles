@@ -1,0 +1,99 @@
+{
+    "height": 24, // Waybar height
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "backlight", "tray", "sway/language", "clock", "group/group-power"],
+    "sway/workspaces": {
+        "disable-scroll": true,
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": "󰝟 {icon} {format_source}",
+        "format-muted": "󰝟 {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+          "headphone": "",
+          "hands-free": "󱠰",
+          "headset": "󰋎",
+          "phone": "",
+          "portable": "",
+          "car": "",
+          "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },	
+    "network": {
+        "format": "{ifname}",
+        "format-wifi": "Connected  ",
+        "format-ethernet": "{ipaddr}/{cidr} 󰈀",
+        "format-disconnected": "Disconnected ⚠", //An empty format will hide the module.
+        "tooltip-format": "{ifname} via {gwaddr} 󰛳",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50
+    },
+    "cpu": {
+        "format": "{usage}% "
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "battery": {
+      "states": {
+        "warning": 30,
+        "critical": 15
+      },
+      "format": "{capacity}% {icon}",
+      "format-charging": "{capacity}% 󰢝",
+      "format-plugged": "{capacity}% ",
+      "format-alt": "{time} {icon}",
+      "format-icons": ["", "", "", "", ""]
+    },
+    "backlight": {
+      "format": "{percent}% {icon}",
+      "format-icons": ["", "", "", "", "", "", "", "", ""],
+      "on-scroll-up": "light -A 1",
+      "on-scroll-down": "light -U 1"
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "sway/language": {
+      "format": "{short} {variant}",
+      "on-click": "swaymsg input type:keyboard xkb_switch_layout next",
+    },
+    "clock": {
+        "format-alt": "{:%Y-%m-%d}"
+    },
+    "group/group-power": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-power",
+            "transition-left-to-right": false,
+        },
+        "modules": [
+            "custom/power", // First element is the "group leader" and won't ever be hidden
+            "custom/lock",
+            "custom/reboot",
+        ]
+    },
+    "custom/lock": {
+        "format": " 󰍁 ",
+        "on-click": "swaylock"
+    },
+    "custom/reboot": {
+        "format": " 󰜉 ",
+        "tooltip": false,
+        "on-click": "reboot"
+    },
+    "custom/power": {
+        "format": "  ",
+        "tooltip": false,
+        "on-click": "shutdown now"
+    },
+}
