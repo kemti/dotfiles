@@ -11,8 +11,10 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+{{ if eq .chezmoi.os "windows" }}
 -- use powershell as shell
 config.default_prog = { "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" }
+{{ end }}
 
 -------------------------------------------------------------------------------
 -- COLORS & APPEREANCE

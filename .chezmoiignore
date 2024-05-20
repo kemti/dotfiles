@@ -1,9 +1,11 @@
 {{ if ne .chezmoi.os "windows" }}
 .config/oh-my-posh/**/*
 Documents/WindowsPowerShell/**/*
+AppData/**/*
 {{ end }}
 
 {{ if ne .chezmoi.os "linux" }}
+.config/nvim/**/*
 .p10k.zsh
 .zshrc
 {{ end }}
