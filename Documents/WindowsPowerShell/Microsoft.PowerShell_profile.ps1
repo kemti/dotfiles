@@ -6,4 +6,5 @@ Invoke-Expression (& { (zoxide init powershell | Out-String) })
 # aliases
 New-Alias vim nvim
 Set-Alias -Name cd -Value z -Option AllScope
+Set-Alias -Name ls -Value eza -Option AllScope
 function config { git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $args}
