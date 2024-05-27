@@ -1,8 +1,8 @@
 include catppuccin-mocha 
 
 input type:keyboard {
-	xkb_layout de,de
-	xkb_variant ,neo_qwertz
+	xkb_layout de,de,eu
+	xkb_variant ,neo_qwertz,
 }
 
 input type:pointer {
