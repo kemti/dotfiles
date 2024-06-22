@@ -22,7 +22,6 @@ require("lazy").setup({
 		-- disable plugins
 		{ "folke/noice.nvim", enabled = false },
 		{ "ggandor/flit.nvim", enabled = false },
-		{ "echasnovski/mini.surround", enabled = false },
 		-- import/override with your plugins
 		{ import = "plugins" },
 	},
