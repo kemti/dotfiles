@@ -11,9 +11,13 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+-- do not check for updates
+config.check_for_updates = false
+
 {{ if eq .chezmoi.os "windows" }}
--- use powershell as shell
-config.default_prog = { "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" }
+-- set shell
+-- config.default_prog = { "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" }
+config.default_prog = { "C:/Users/Tim/scoop/shims/nu.exe" }
 {{ end }}
 
 -------------------------------------------------------------------------------
