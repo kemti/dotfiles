@@ -1,0 +1,5 @@
+set relativenumber
+
+let mapleader = " "
+
+nnoremap <leader>ff :vsc ReSharper.ReSharper_GotoFile<CR>
