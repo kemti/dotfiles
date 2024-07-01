@@ -1,0 +1,113 @@
+" General Settings
+" -----------------------------------------------------------------------------
+set relativenumber
+set scrolloff=4
+set showmode
+set showcmd
+set visualbell
+set clipboard+=unnamed
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+
+" Leader
+" -----------------------------------------------------------------------------
+let mapleader = " "
+
+" Plugins
+" -----------------------------------------------------------------------------
+set highlightedyank
+set sneak
+set nerdtree
+
+set easymotion
+set notimeout
+
+set surround
+" vim-surround
+" NOTE: remapping doesn't work
+" let g:surround_no_mappings = 1
+" nmap gzd   <Plug>(Dsurround)
+" nmap gzr   <Plug>(Csurround)
+" nmap gZr   <Plug>(CSurround)
+" nmap gz    <Plug>(Ysurround)
+" nmap gzz   <Plug>(Yssurround)
+" nmap gZ    <Plug>(YSurround)
+" nmap gZZ   <Plug>(YSsurround)
+" nmap gZz   <Plug>(YSsurround)
+" xmap gz    <Plug>(VSurround)
+" xmap gZ    <Plug>(VgSurround)
+
+set which-key
+let g:WhichKeyDesc_buffer = "<leader>b +buffer"
+let g:WhichKeyDesc_buffer_delete = "<leader>bd Delete Buffer"
+let g:WhichKeyDesc_buffer_delete_left = "<leader>bl Delete Buffers to the Left"
+let g:WhichKeyDesc_buffer_delete_right = "<leader>br Delete Buffers to the Right"
+let g:WhichKeyDesc_buffer_hide_all_tool_windows = "<leader>bh Hide All Tool Windows"
+
+let g:WhichKeyDesc_code = "<leader>c +code"
+let g:WhichKeyDesc_code_action = "<leader>ca Code Action"
+let g:WhichKeyDesc_code_rename = "<leader>cr Rename"
+
+let g:WhichKeyDesc_explorer = "<leader>e Explorer"
+
+let g:WhichKeyDesc_file = "<leader>f +file/find"
+let g:WhichKeyDesc_find_command = "<leader>fc Find Action"
+let g:WhichKeyDesc_find_file = "<leader>ff Find File"
+
+let g:WhichKeyDesc_git = "<leader>g +git"
+let g:WhichKeyDesc_git_toolwindow = "<leader>gg Git Tool Window "
+
+let g:WhichKeyDesc_search = "<leader>s +search"
+let g:WhichKeyDesc_search_symbol_file = "<leader>ss Goto Symbol"
+let g:WhichKeyDesc_search_symbol_workspace = "<leader>sS Goto Symbol"
+
+let g:WhichKeyDesc_prev_tab = "[b Previous Buffer"
+let g:WhichKeyDesc_next_tab = "]b Next Buffer"
+let g:WhichKeyDesc_prev_error = "[e Previous Error"
+let g:WhichKeyDesc_next_error = "]e Next Error"
+
+" Keymaps
+" -----------------------------------------------------------------------------
+
+" General
+inoremap jk <Esc>
+nmap <leader>, <Action>(Switcher)
+nmap <leader><leader> <Action>(GotoFile)
+nmap <leader>e :NERDTreeFocus<CR>
+
+" Window
+nmap <leader>wv <Action>(SplitVertically)
+nmap <leader>wh <Action>(SplitHorizontally)
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
+
+" Tab
+nmap <leader>, <Action>(Switcher)
+nmap <leader><tab>[ <Action>(PreviousTab)
+nmap <leader><tab>] <Action>(NextTab)
+
+" [ & ]
+nmap [b <Action>(PreviousTab)
+nmap ]b <Action>(NextTab)
+nmap [e <Action>(GotoPreviousError)
+nmap ]e <Action>(GotoNextError)
+nmap ]m :action MethodDown<CR>
+nmap [m :action MethodUp<CR>
+
+map <leader>bd <Action>(CloseEditor)
+map <leader>bl <Action>(CloseAllToTheLeft)
+map <leader>br <Action>(CloseAllToTheRight)
+map <leader>bh <Action>(HideAllWindows)
+map <leader>ca <Action>(ShowIntentionActions)
+map <leader>cr <Action>(RenameElement)
+map <leader>fc <Action>(GotoAction)
+map <leader>ff <Action>(GotoFile)
+map <leader>gg <Action>(ActivateVersionControlToolWindow) <Action>(ActivateCommitToolWindow)
+map <leader>sd <Action>(ActivateProblemsViewToolWindow)
+map <leader>ss <Action>(GotoSymbol)
+map <leader>sS <Action>(GotoSymbol)
+ 
