@@ -78,6 +78,7 @@ let g:WhichKeyDesc_next_error = "]e Next Error"
 " Debug
 let g:WhichKeyDesc_debug = "<leader>d +debug"
 let g:WhichKeyDesc_debug_toggle_breakpoint = "<leader>db Toggle Breakpoint"
+let g:WhichKeyDesc_debug_attach_process = "<leader>dA Attach to Process"
 
 " Keymaps
 " -----------------------------------------------------------------------------
@@ -110,6 +111,8 @@ nmap <leader>cs <Action>(ActivateStructureToolWindow)
 
 " Debug
 nmap<leader>db <Action>(ToggleLineBreakpoint)
+vmap<leader>db <Action>(ToggleLineBreakpoint)
+nmap<leader>dA <Action>(XDebugger.AttachToProcess)
 
 " Find/Files
 nmap <leader>fc <Action>(GotoAction)
