@@ -17,6 +17,7 @@ let mapleader = " "
 
 " Plugins
 " -----------------------------------------------------------------------------
+set commentary
 set highlightedyank
 set sneak
 set nerdtree
@@ -39,6 +40,8 @@ set surround
 " xmap gz    <Plug>(VSurround)
 " xmap gZ    <Plug>(VgSurround)
 
+" which-key
+" -----------------------------------------------------------------------------
 set which-key
 let g:WhichKeyDesc_buffer = "<leader>b +buffer"
 let g:WhichKeyDesc_buffer_delete = "<leader>bd Delete Buffer"
@@ -49,15 +52,19 @@ let g:WhichKeyDesc_buffer_hide_all_tool_windows = "<leader>bh Hide All Tool Wind
 let g:WhichKeyDesc_code = "<leader>c +code"
 let g:WhichKeyDesc_code_action = "<leader>ca Code Action"
 let g:WhichKeyDesc_code_rename = "<leader>cr Rename"
+let g:WhichKeyDesc_code_hover_info = "<leader>cd Hover Info"
+let g:WhichKeyDesc_code_structure = "<leader>cs Structure"
 
 let g:WhichKeyDesc_explorer = "<leader>e Explorer"
 
 let g:WhichKeyDesc_file = "<leader>f +file/find"
 let g:WhichKeyDesc_find_command = "<leader>fc Find Action"
 let g:WhichKeyDesc_find_file = "<leader>ff Find File"
+let g:WhichKeyDesc_find_recent = "<leader>fr Recent"
 
 let g:WhichKeyDesc_git = "<leader>g +git"
 let g:WhichKeyDesc_git_toolwindow = "<leader>gg Git Tool Window "
+let g:WhichKeyDesc_git_blame = "<leader>gb Git Blame"
 
 let g:WhichKeyDesc_search = "<leader>s +search"
 let g:WhichKeyDesc_search_symbol_file = "<leader>ss Goto Symbol"
@@ -68,6 +75,10 @@ let g:WhichKeyDesc_next_tab = "]b Next Buffer"
 let g:WhichKeyDesc_prev_error = "[e Previous Error"
 let g:WhichKeyDesc_next_error = "]e Next Error"
 
+" Debug
+let g:WhichKeyDesc_debug = "<leader>d +debug"
+let g:WhichKeyDesc_debug_toggle_breakpoint = "<leader>db Toggle Breakpoint"
+
 " Keymaps
 " -----------------------------------------------------------------------------
 
@@ -77,9 +88,44 @@ nmap <leader>, <Action>(Switcher)
 nmap <leader><leader> <Action>(GotoFile)
 nmap <leader>e :NERDTreeFocus<CR>
 
+" move half page up/down and center cursor
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+" cycle search terms and center cursor
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" move selected lines up/down
+"vnoremap K :m '<-2<CR>gv=gv
+"vnoremap J :m '>+1<cr>gv=gv
+"vnoremap <S-Up> :m '<-2<CR>gv=gv
+"vnoremap <S-Down> :m '>+1<cr>gv=gv
+
+" Code
+nmap <leader>ca <Action>(ShowIntentionActions)
+nmap <leader>cd <Action>(ShowHoverInfo)
+nmap <leader>cr <Action>(RenameElement)
+nmap <leader>cs <Action>(ActivateStructureToolWindow)
+
+" Debug
+nmap<leader>db <Action>(ToggleLineBreakpoint)
+
+" Find/Files
+nmap <leader>fc <Action>(GotoAction)
+nmap <leader>ff <Action>(GotoFile)
+nmap <leader>fr <Action>(RecentFiles)
+
+" Git
+nmap <leader>gg <Action>(ActivateVersionControlToolWindow) <Action>(ActivateCommitToolWindow)
+nmap <leader>gb <Action>(Annotate)
+
 " Window
 nmap <leader>wv <Action>(SplitVertically)
 nmap <leader>wh <Action>(SplitHorizontally)
+"nmap <leader>wb <Action>(ActivateBuildToolWindow)
+"nmap <leader>wu <Action>(ActivateUnitTestsToolWindow)
+"nmap <leader>wn <Action>(ActivateNuGetToolWindow)
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap <C-k> <C-w>k
@@ -95,19 +141,16 @@ nmap [b <Action>(PreviousTab)
 nmap ]b <Action>(NextTab)
 nmap [e <Action>(GotoPreviousError)
 nmap ]e <Action>(GotoNextError)
-nmap ]m :action MethodDown<CR>
-nmap [m :action MethodUp<CR>
+nmap ]m <Action>(MethodDown)
+nmap [m <Action>(MethodUp)
+
+" 'g'
+nmap gr <Action>(FindUsages)
 
 map <leader>bd <Action>(CloseEditor)
 map <leader>bl <Action>(CloseAllToTheLeft)
 map <leader>br <Action>(CloseAllToTheRight)
 map <leader>bh <Action>(HideAllWindows)
-map <leader>ca <Action>(ShowIntentionActions)
-map <leader>cr <Action>(RenameElement)
-map <leader>fc <Action>(GotoAction)
-map <leader>ff <Action>(GotoFile)
-map <leader>gg <Action>(ActivateVersionControlToolWindow) <Action>(ActivateCommitToolWindow)
 map <leader>sd <Action>(ActivateProblemsViewToolWindow)
 map <leader>ss <Action>(GotoSymbol)
 map <leader>sS <Action>(GotoSymbol)
- 
