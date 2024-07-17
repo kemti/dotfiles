@@ -2,15 +2,21 @@
 
 palette = "catppuccin_mocha"
 
-# format = """$directory$git_branch
-# $character"""
+format = """$directory$git_branch$fill$cmd_duration
+$character"""
+
+[character]
+format = "$symbol "
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
 
 [directory]
-style = "fg:pink"
-format = "[$path ]($style)"
+style = "bold lavender"
 truncation_length = 3
 truncation_symbol = "…/"
 
+[fill]
+symbol = " "
 
 [palettes.catppuccin_latte]
 rosewater = "#dc8a78"
