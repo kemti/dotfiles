@@ -2,6 +2,119 @@
 #
 # version = "0.93.0"
 
+const color_palette = {
+    rosewater: "#f5e0dc"
+    flamingo: "#f2cdcd"
+    pink: "#f5c2e7"
+    mauve: "#cba6f7"
+    red: "#f38ba8"
+    maroon: "#eba0ac"
+    peach: "#fab387"
+    yellow: "#f9e2af"
+    green: "#a6e3a1"
+    teal: "#94e2d5"
+    sky: "#89dceb"
+    sapphire: "#74c7ec"
+    blue: "#89b4fa"
+    lavender: "#b4befe"
+    text: "#cdd6f4"
+    subtext1: "#bac2de"
+    subtext0: "#a6adc8"
+    overlay2: "#9399b2"
+    overlay1: "#7f849c"
+    overlay0: "#6c7086"
+    surface2: "#585b70"
+    surface1: "#45475a"
+    surface0: "#313244"
+    base: "#1e1e2e"
+    mantle: "#181825"
+    crust: "#11111b"
+}
+let theme_catpuccin_mocha = {
+    separator: $color_palette.overlay0
+    leading_trailing_space_bg: { attr: "n" }
+    header: { fg: $color_palette.blue attr: "b" }
+    empty: $color_palette.lavender
+    bool: $color_palette.lavender
+    int: $color_palette.peach
+    duration: $color_palette.text
+    filesize: {|e|
+          if $e < 1mb {
+            $color_palette.green
+        } else if $e < 100mb {
+            $color_palette.yellow
+        } else if $e < 500mb {
+            $color_palette.peach
+        } else if $e < 800mb {
+            $color_palette.maroon
+        } else if $e > 800mb {
+            $color_palette.red
+        }
+    }
+    date: {|| (date now) - $in |
+        if $in < 1hr {
+            $color_palette.green
+        } else if $in < 1day {
+            $color_palette.yellow
+        } else if $in < 3day {
+            $color_palette.peach
+        } else if $in < 1wk {
+            $color_palette.maroon
+        } else if $in > 1wk {
+            $color_palette.red
+        }
+    }
+    range: $color_palette.text
+    float: $color_palette.text
+    string: $color_palette.text
+    nothing: $color_palette.text
+    binary: $color_palette.text
+    cellpath: $color_palette.text
+    row_index: { fg: $color_palette.mauve attr: "b" }
+    record: $color_palette.text
+    list: $color_palette.text
+    block: $color_palette.text
+    hints: $color_palette.overlay1
+    search_result: { fg: $color_palette.red bg: $color_palette.text }
+
+    shape_and: { fg: $color_palette.pink attr: "b" }
+    shape_binary: { fg: $color_palette.pink attr: "b" }
+    shape_block: { fg: $color_palette.blue attr: "b" }
+    shape_bool: $color_palette.teal
+    shape_custom: $color_palette.green
+    shape_datetime: { fg: $color_palette.teal attr: "b" }
+    shape_directory: $color_palette.teal
+    shape_external: $color_palette.teal
+    shape_externalarg: { fg: $color_palette.green attr: "b" }
+    shape_filepath: $color_palette.teal
+    shape_flag: { fg: $color_palette.blue attr: "b" }
+    shape_float: { fg: $color_palette.pink attr: "b" }
+    shape_garbage: { fg: $color_palette.text bg: $color_palette.red attr: "b" }
+    shape_globpattern: { fg: $color_palette.teal attr: "b" }
+    shape_int: { fg: $color_palette.pink attr: "b" }
+    shape_internalcall: { fg: $color_palette.teal attr: "b" }
+    shape_list: { fg: $color_palette.teal attr: "b" }
+    shape_literal: $color_palette.blue
+    shape_match_pattern: $color_palette.green
+    shape_matching_brackets: { attr: "u" }
+    shape_nothing: $color_palette.teal
+    shape_operator: $color_palette.peach
+    shape_or: { fg: $color_palette.pink attr: "b" }
+    shape_pipe: { fg: $color_palette.pink attr: "b" }
+    shape_range: { fg: $color_palette.peach attr: "b" }
+    shape_record: { fg: $color_palette.teal attr: "b" }
+    shape_redirection: { fg: $color_palette.pink attr: "b" }
+    shape_signature: { fg: $color_palette.green attr: "b" }
+    shape_string: $color_palette.green
+    shape_string_interpolation: { fg: $color_palette.teal attr: "b" }
+    shape_table: { fg: $color_palette.blue attr: "b" }
+    shape_variable: $color_palette.pink
+
+    background: $color_palette.base
+    foreground: $color_palette.text
+    cursor: $color_palette.blue
+}
+
 # For more information on defining custom themes, see
 # https://www.nushell.sh/book/coloring_and_theming.html
 # And here is the theme collection
@@ -141,6 +254,8 @@ let light_theme = {
 #     carapace $spans.0 nushell ...$spans | from json
 # }
 
+$env.LS_COLORS = (vivid generate catppuccin-mocha | str trim)
+
 # The default config record. This is where much of your global configuration is setup.
 $env.config = {
     show_banner: false # true or false to enable or disable the welcome banner at startup
@@ -226,7 +341,7 @@ $env.config = {
         vi_normal: underscore # block, underscore, line, blink_block, blink_underscore, blink_line, inherit to skip setting cursor shape (underscore is the default)
     }
 
-    color_config: $dark_theme # if you want a more interesting theme, you can replace the empty record with `$dark_theme`, `$light_theme` or another custom record
+    color_config: $theme_catpuccin_mocha # if you want a more interesting theme, you can replace the empty record with `$dark_theme`, `$light_theme` or another custom record
     use_grid_icons: true
     footer_mode: "25" # always, never, number_of_rows, auto
     float_precision: 2 # the precision for displaying floats in tables
@@ -235,7 +350,7 @@ $env.config = {
     bracketed_paste: true # enable bracketed paste, currently useless on windows
     edit_mode: emacs # emacs, vi
     shell_integration: false # enables terminal shell integration. Off by default, as some terminals have issues with this.
-    render_right_prompt_on_last_line: false # true or false to enable or disable right prompt to be rendered on last line of the prompt.
+    render_right_prompt_on_last_line: true # true or false to enable or disable right prompt to be rendered on last line of the prompt.
     use_kitty_protocol: false # enables keyboard enhancement protocol implemented by kitty console, only if your terminal support this.
     highlight_resolved_externals: false # true enables highlighting of external commands in the repl resolved by which.
     recursion_limit: 50 # the maximum number of times nushell allows recursion before stopping it

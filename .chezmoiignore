@@ -7,7 +7,6 @@ AppData/**/*
 {{ end }}
 
 {{ if ne .chezmoi.os "linux" }}
-.config/nvim/**/*
 .config/rofi/**/*
 .config/sway/**/*
 .config/swaylock/**/*
