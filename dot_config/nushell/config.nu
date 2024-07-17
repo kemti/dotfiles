@@ -254,7 +254,8 @@ let light_theme = {
 #     carapace $spans.0 nushell ...$spans | from json
 # }
 
-$env.LS_COLORS = (vivid generate catppuccin-mocha | str trim)
+# generate via 'vivid generate catppuccin-mocha | save ~/.config/nushell/ls-colors.txt'
+$env.LS_COLORS = (open ~/.config/nushell/ls-colors.txt | str trim)
 
 # The default config record. This is where much of your global configuration is setup.
 $env.config = {
@@ -980,7 +981,6 @@ $env.config = {
     ]
 }
 
-# source ~/.oh-my-posh.nu
 use ~/.cache/starship/init.nu
 source ~/.zoxide.nu
 
