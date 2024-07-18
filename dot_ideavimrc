@@ -43,6 +43,9 @@ set surround
 " which-key
 " -----------------------------------------------------------------------------
 set which-key
+
+let g:WhichKeyDesc_g_Goto_Implementation = "gI Goto Implementation"
+
 let g:WhichKeyDesc_buffer = "<leader>b +buffer"
 let g:WhichKeyDesc_buffer_delete = "<leader>bd Delete Buffer"
 let g:WhichKeyDesc_buffer_delete_left = "<leader>bl Delete Buffers to the Left"
@@ -102,6 +105,9 @@ nnoremap N Nzzzv
 "vnoremap J :m '>+1<cr>gv=gv
 "vnoremap <S-Up> :m '<-2<CR>gv=gv
 "vnoremap <S-Down> :m '>+1<cr>gv=gv
+
+" <g>
+nmap gI <Action>(ReSharperGotoImplementation)
 
 " Code
 nmap <leader>ca <Action>(ShowIntentionActions)
