@@ -26,7 +26,7 @@ return {
 
 			opts.preselect = cmp.PreselectMode.None
 			opts.completion = {
-				completeopt = "menu,menuone,noselect",
+				completeopt = "menu,menuone",
 			}
 			opts.mapping = vim.tbl_extend("force", opts.mapping, {
 				["<CR>"] = cmp.mapping.confirm({ select = false }),
@@ -55,7 +55,7 @@ return {
 				end, { "i", "s" }),
 			})
 			opts.experimental = {
-				ghost_text = false,
+				ghost_text = true,
 			}
 		end,
 	},
