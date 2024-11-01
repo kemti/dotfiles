@@ -110,6 +110,14 @@
 ;;  lctl lmet lalt           spc            @nav rmet rctl
 ;;)
 
+(deflayer base
+  ^         1    2    3    4    5    6    7    8    9    0    ß    ´    bspc
+  tab       q    w    e    r    t    z    u    i    o    p    ü    +
+  @sym      @a   @s   @d   @f   g    h    @j   @k   @l   @ö   ä    @sym ret
+  XX   @nav y    x    c    v    b    n    m    ,    .    -    XX
+  XX   XX   XX           spc              @nav XX   XX
+)
+
 ;;(deflayer base
 ;;  ^         1    2    3    4    5    6    7    8    9    0    ß    ´    bspc
 ;;  tab       q    w    e    r    t    z    u    i    o    p    ü    +
@@ -118,13 +126,13 @@
 ;;  lctl lmet lalt           spc            @nav rmet rctl
 ;;)
 
-(deflayer base
-  ^         1    2    3    4    5    6    7    8    9    0    ß    ´    bspc
-  tab       q    w    e    r    t    z    u    i    o    p    ü    +
-  @sym      a    s    d    f    g     h   j    k    l    ö    ä    @sym ret
-  XX   @nav @y   @x   @c   @v   b     n   @m   @,   @.   @-   XX
-  XX   XX   XX           spc              @nav XX   XX
-)
+;;(deflayer base
+;;  ^         1    2    3    4    5    6    7    8    9    0    ß    ´    bspc
+;;  tab       q    w    e    r    t    z    u    i    o    p    ü    +
+;;  @sym      a    s    d    f    g     h   j    k    l    ö    ä    @sym ret
+;;  XX   @nav @y   @x   @c   @v   b     n   @m   @,   @.   @-   XX
+;;  XX   XX   XX           spc              @nav XX   XX
+;;)
 
 (deflayer basenomods
   ^         1    2    3    4    5    6    7    8    9    0    ß    ´    bspc
@@ -144,7 +152,7 @@
 
 (deflayer nav
   XX        XX   XX   XX   XX   XX    XX   XX        XX        XX   XX   XX   XX  _
-  _         ⇞    ⌫    ⤓    ⌦    ⇟     XX   7    8    9    +    -    XX
+  _         ⇞    ⌫    ▲    ⌦    ⇟     XX   7    8    9    +    -    XX
   XX        ↖    ◀    ▼    ▶    ↘     XX   4    5    6    @*   @/   XX   _
   lsft XX   ⎋    ⭾    ⎀    ⏎    @undo @:   1    2    3    @;   _
   _    _    _              0               XX   _    _
