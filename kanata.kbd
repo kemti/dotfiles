@@ -1,0 +1,151 @@
+(defcfg
+  process-unmapped-keys no
+  windows-altgr cancel-lctl-press
+)
+
+(defvar
+  ;; Note: consider using different time values for your different fingers.
+  ;; For example, your pinkies might be slower to release keys and index
+  ;; fingers faster.
+  tap-time 200
+  hold-time 150
+
+  left-hand-keys (
+    q w e r t
+    a s d f g
+    z x c v b
+  )
+  right-hand-keys (
+    y u i o p
+    h j k l ;
+    n m , . /
+  )
+)
+
+(deflocalkeys-win
+  ü    186
+  +    187
+  #    191
+  ö    192
+  ß    219
+  ^    220
+  ´    221
+  ä    222
+  <    226
+)
+
+(defsrc
+  ^         1    2    3    4    5    6    7    8    9    0    ß    ´    bspc
+  tab       q    w    e    r    t    z    u    i    o    p    ü    +
+  caps      a    s    d    f    g    h    j    k    l    ö    ä    #    ret
+  lsft <    y    x    c    v    b    n    m    ,    .    -    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(deffakekeys
+  to-base (layer-switch base)
+)
+
+(defalias
+  tap (multi
+    (layer-switch basenomods)
+    (on-idle-fakekey to-base tap 20)
+  )
+
+  a (tap-hold-release-keys $tap-time $hold-time (multi a @tap) lmet $left-hand-keys)
+  s (tap-hold-release-keys $tap-time $hold-time (multi s @tap) lalt $left-hand-keys)
+  d (tap-hold-release-keys $tap-time $hold-time (multi d @tap) lctl $left-hand-keys)
+  f (tap-hold-release-keys $tap-time $hold-time (multi f @tap) lsft $left-hand-keys)
+  j (tap-hold-release-keys $tap-time $hold-time (multi j @tap) rsft $right-hand-keys)
+  k (tap-hold-release-keys $tap-time $hold-time (multi k @tap) rctl $right-hand-keys)
+  l (tap-hold-release-keys $tap-time $hold-time (multi l @tap) ralt $right-hand-keys)
+  ö (tap-hold-release-keys $tap-time $hold-time (multi ; @tap) rmet $right-hand-keys)
+
+  y (tap-hold-release-keys $tap-time $hold-time (multi y @tap) lmet $left-hand-keys)
+  x (tap-hold-release-keys $tap-time $hold-time (multi x @tap) lalt $left-hand-keys)
+  c (tap-hold-release-keys $tap-time $hold-time (multi c @tap) lctl $left-hand-keys)
+  v (tap-hold-release-keys $tap-time $hold-time (multi v @tap) lsft $left-hand-keys)
+  m (tap-hold-release-keys $tap-time $hold-time (multi m @tap) rsft $right-hand-keys)
+  , (tap-hold-release-keys $tap-time $hold-time (multi , @tap) rctl $right-hand-keys)
+  . (tap-hold-release-keys $tap-time $hold-time (multi . @tap) ralt $right-hand-keys)
+  - (tap-hold-release-keys $tap-time $hold-time (multi - @tap) rmet $right-hand-keys)
+
+  sym (layer-while-held sym)
+  nav (layer-while-held nav)
+  ^  (multi ^ spc) 
+  '  S-#
+  _  S--
+  >  S-<
+  *  S-+
+  :  S-.
+  ;  S-,
+  !  S-1
+  '' S-2
+  §  S-3
+  $  S-4
+  %  S-5
+  &  S-6
+  /  S-7
+  LParen S-8
+  RParen S-9
+  =  S-0
+  ?  S-ß
+  @  RA-q
+  {  RA-7
+  [  RA-8
+  ]  RA-9
+  }  RA-0
+  \  RA-ß
+  |  RA-<
+  ~  RA-+
+  `  S-´
+  undo C-z
+)
+
+;;(deflayer base
+;;  ^         1    2    3    4    5    6    7    8    9    0    ß    ´    bspc
+;;  tab       q    w    e    r    t    z    u    i    o    p    ü    +
+;;  @sym      @a   @s   @d   @f   g    h    @j   @k   @l   @ö   ä    @sym ret
+;;  lsft @nav y    x    c    v    b    n    m    ,    .    -    rsft
+;;  lctl lmet lalt           spc            @nav rmet rctl
+;;)
+
+;;(deflayer base
+;;  ^         1    2    3    4    5    6    7    8    9    0    ß    ´    bspc
+;;  tab       q    w    e    r    t    z    u    i    o    p    ü    +
+;;  @sym      a    s    d    f    g     h   j    k    l    ö    ä    @sym ret
+;;  lsft @nav @y   @x   @c   @v   b     n   @m   @,   @.   @-   rsft
+;;  lctl lmet lalt           spc            @nav rmet rctl
+;;)
+
+(deflayer base
+  ^         1    2    3    4    5    6    7    8    9    0    ß    ´    bspc
+  tab       q    w    e    r    t    z    u    i    o    p    ü    +
+  @sym      a    s    d    f    g     h   j    k    l    ö    ä    @sym ret
+  XX   @nav @y   @x   @c   @v   b     n   @m   @,   @.   @-   XX
+  XX   XX   XX           spc              @nav XX   XX
+)
+
+(deflayer basenomods
+  ^         1    2    3    4    5    6    7    8    9    0    ß    ´    bspc
+  tab       q    w    e    r    t    z    u    i    o    p    ü    +
+  @sym      a    s    d    f    g    h    j    k    l    ö    ä    @sym ret
+  lsft @nav y    x    c    v    b    n    m    ,    .    -    rsft
+  lctl lmet lalt           spc            @nav rmet rctl
+)
+
+(deflayer sym
+  XX        XX   XX   XX   XX   XX   XX   XX        XX        XX   XX   XX   XX  _
+  _         XX   @_   @[   @]   @^   @!   <         @>        @=   @&   XX   XX
+  @sym      @\   @/   @{   @}   @*   @?   @LParen   @RParen   -    @:   @@   XX  _
+  _    XX   #    @$   @|   @~   @`   +    @%        @''       @'   @;   _
+  _    _    _              _              _         _         _
+)
+
+(deflayer nav
+  XX        XX   XX   XX   XX   XX    XX   XX        XX        XX   XX   XX   XX  _
+  _         ⇞    ⌫    ⤓    ⌦    ⇟     XX   7    8    9    +    -    XX
+  XX        ↖    ◀    ▼    ▶    ↘     XX   4    5    6    @*   @/   XX   _
+  lsft XX   ⎋    ⭾    ⎀    ⏎    @undo @:   1    2    3    @;   _
+  _    _    _              0               XX   _    _
+)
