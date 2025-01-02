@@ -14,6 +14,7 @@ $env.FZF_DEFAULT_OPTS = '--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38b
 
 # yazi config directory
 $env.YAZI_CONFIG_HOME = '~/.config/yazi'
+$env.YAZI_FILE_ONE = 'C:/Users/Tim/scoop/apps/git/current/usr/bin/file.exe'
 
 # Specifies how environment variables are:
 # - converted from a string to a value on Nushell startup (from_string)
