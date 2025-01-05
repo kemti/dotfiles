@@ -35,7 +35,6 @@
 )
 
 (defsrc
-  ^         1    2    3    4    5    6    7    8    9    0    ß    ´    bspc
   tab       q    w    e    r    t    z    u    i    o    p    ü    +
   caps      a    s    d    f    g    h    j    k    l    ö    ä    #    ret
   lsft <    y    x    c    v    b    n    m    ,    .    -    rsft
@@ -52,6 +51,7 @@
     (on-idle-fakekey to-base tap 20)
   )
 
+  ;; home row mod
   a (tap-hold-release-keys $tap-time $hold-time (multi a @tap) lmet $left-hand-keys)
   s (tap-hold-release-keys $tap-time $hold-time (multi s @tap) lalt $left-hand-keys)
   d (tap-hold-release-keys $tap-time $hold-time (multi d @tap) lctl $left-hand-keys)
@@ -61,17 +61,24 @@
   l (tap-hold-release-keys $tap-time $hold-time (multi l @tap) ralt $right-hand-keys)
   ö (tap-hold-release-keys $tap-time $hold-time (multi ; @tap) rmet $right-hand-keys)
 
-  y (tap-hold-release-keys $tap-time $hold-time (multi y @tap) lmet $left-hand-keys)
-  x (tap-hold-release-keys $tap-time $hold-time (multi x @tap) lalt $left-hand-keys)
-  c (tap-hold-release-keys $tap-time $hold-time (multi c @tap) lctl $left-hand-keys)
-  v (tap-hold-release-keys $tap-time $hold-time (multi v @tap) lsft $left-hand-keys)
-  m (tap-hold-release-keys $tap-time $hold-time (multi m @tap) rsft $right-hand-keys)
-  , (tap-hold-release-keys $tap-time $hold-time (multi , @tap) rctl $right-hand-keys)
-  . (tap-hold-release-keys $tap-time $hold-time (multi . @tap) ralt $right-hand-keys)
-  - (tap-hold-release-keys $tap-time $hold-time (multi - @tap) rmet $right-hand-keys)
+  ;; bottom row mods
+  ;;y (tap-hold-release-keys $tap-time $hold-time (multi y @tap) lmet $left-hand-keys)
+  ;;x (tap-hold-release-keys $tap-time $hold-time (multi x @tap) lalt $left-hand-keys)
+  ;;c (tap-hold-release-keys $tap-time $hold-time (multi c @tap) lctl $left-hand-keys)
+  ;;v (tap-hold-release-keys $tap-time $hold-time (multi v @tap) lsft $left-hand-keys)
+  ;;m (tap-hold-release-keys $tap-time $hold-time (multi m @tap) rsft $right-hand-keys)
+  ;;, (tap-hold-release-keys $tap-time $hold-time (multi , @tap) rctl $right-hand-keys)
+  ;;. (tap-hold-release-keys $tap-time $hold-time (multi . @tap) ralt $right-hand-keys)
+  ;;- (tap-hold-release-keys $tap-time $hold-time (multi - @tap) rmet $right-hand-keys)
 
-  sym (layer-while-held sym)
+
+  syr (layer-while-held syr)
+  syl (layer-while-held syl)
+  num (layer-while-held num)
   nav (layer-while-held nav)
+  
+  cw (caps-word 2000)
+	
   ^  (multi ^ spc) 
   '  S-#
   _  S--
@@ -86,8 +93,8 @@
   %  S-5
   &  S-6
   /  S-7
-  LParen S-8
-  RParen S-9
+  LPr S-8
+  RPr S-9
   =  S-0
   ?  S-ß
   @  RA-q
@@ -99,61 +106,78 @@
   |  RA-<
   ~  RA-+
   `  S-´
-  undo C-z
+  udo C-z
 )
-
-;;(deflayer base
-;;  ^         1    2    3    4    5    6    7    8    9    0    ß    ´    bspc
-;;  tab       q    w    e    r    t    z    u    i    o    p    ü    +
-;;  @sym      @a   @s   @d   @f   g    h    @j   @k   @l   @ö   ä    @sym ret
-;;  lsft @nav y    x    c    v    b    n    m    ,    .    -    rsft
-;;  lctl lmet lalt           spc            @nav rmet rctl
-;;)
 
 (deflayer base
-  ^         1    2    3    4    5    6    7    8    9    0    ß    ´    bspc
-  tab       q    w    e    r    t    z    u    i    o    p    ü    +
-  @sym      @a   @s   @d   @f   g    h    @j   @k   @l   @ö   ä    @sym ret
-  XX   @nav y    x    c    v    b    n    m    ,    .    -    XX
-  XX   XX   XX           spc              @nav XX   XX
+  tab         q     w     e     r     t     z     u     i     o     p     ü     +
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  @syr        @a    @s    @d    @f    g     h     @j    @k    @l    @ö    ä     @syl  ret
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  lsft  @num  y     x     c     v     b     n     m     ,     .     -     rsft
+;;_____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+  lctl  lmet  lalt              spc               @nav  rmet  rctl
+;;_____ _____ _____             _____             _____ _____ _____
 )
-
-;;(deflayer base
-;;  ^         1    2    3    4    5    6    7    8    9    0    ß    ´    bspc
-;;  tab       q    w    e    r    t    z    u    i    o    p    ü    +
-;;  @sym      a    s    d    f    g     h   j    k    l    ö    ä    @sym ret
-;;  lsft @nav @y   @x   @c   @v   b     n   @m   @,   @.   @-   rsft
-;;  lctl lmet lalt           spc            @nav rmet rctl
-;;)
-
-;;(deflayer base
-;;  ^         1    2    3    4    5    6    7    8    9    0    ß    ´    bspc
-;;  tab       q    w    e    r    t    z    u    i    o    p    ü    +
-;;  @sym      a    s    d    f    g     h   j    k    l    ö    ä    @sym ret
-;;  XX   @nav @y   @x   @c   @v   b     n   @m   @,   @.   @-   XX
-;;  XX   XX   XX           spc              @nav XX   XX
-;;)
 
 (deflayer basenomods
-  ^         1    2    3    4    5    6    7    8    9    0    ß    ´    bspc
-  tab       q    w    e    r    t    z    u    i    o    p    ü    +
-  @sym      a    s    d    f    g    h    j    k    l    ö    ä    @sym ret
-  lsft @nav y    x    c    v    b    n    m    ,    .    -    rsft
-  lctl lmet lalt           spc            @nav rmet rctl
+  tab         q     w     e     r     t     z     u     i     o     p     ü     +
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  @syr        a     s     d     f     g     h     j     k     l     ö     ä     @syl ret
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  lsft  @num  y     x     c     v     b     n     m     ,     .     -     rsft
+;;_____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+  lctl  lmet  lalt              spc               @nav  rmet  rctl
+;;_____ _____ _____             _____             _____ _____ _____
 )
 
-(deflayer sym
-  XX        XX   XX   XX   XX   XX   XX   XX        XX        XX   XX   XX   XX  _
-  _         XX   @_   @[   @]   @^   @!   <         @>        @=   @&   XX   XX
-  @sym      @\   @/   @{   @}   @*   @?   @LParen   @RParen   -    @:   @@   XX  _
-  _    XX   #    @$   @|   @~   @`   +    @%        @''       @'   @;   _
-  _    _    _              _              _         _         _
+(deflayer syl
+  XX          @cw   @_    @[    @]    @^    XX    XX    XX    XX    XX    XX    XX
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _           @\    @/    @{    @}    @*    XX    lsft  lctl  lalt  lmet  XX    _     _
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _     XX    #     @$    @|    @~    @`    XX    XX    XX    XX    XX    XX
+;;_____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _     _     _                 _                 _     _     _
+;;_____ _____ _____             _____             _____ _____ _____
+)
+
+(deflayer syr
+  _           XX    XX    XX    XX    XX    @!    <     @>    @=    @&    XX    XX
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _           lmet  lalt  lctl  lsft  XX    @?    @LPr  @RPr  -     @:    @@    _     _
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _     XX    XX    XX    XX    XX    XX    +     @%    @''   @'    @;    XX
+;;_____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+  _     _     _                 _                 _     _     _
+;;_____ _____ _____             _____             _____ _____ _____
+)
+
+(deflayer num
+  _           XX    XX    XX    XX    XX    @*    7     8     9     +     -     XX
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _           lmet  lalt  lctl  lsft  XX    @/    4     5     6     ,     .     _     _
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _     XX    XX    XX    XX    XX    XX    @:    1     2     3     @;    XX
+;;_____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+  _     _     _                 0                 _     _     _
+;;_____ _____ _____             _____             _____ _____ _____
 )
 
 (deflayer nav
-  XX        XX   XX   XX   XX   XX    XX   XX        XX        XX   XX   XX   XX  _
-  _         ⇞    ⌫    ▲    ⌦    ⇟     XX   7    8    9    +    -    XX
-  XX        ↖    ◀    ▼    ▶    ↘     XX   4    5    6    @*   @/   XX   _
-  lsft XX   ⎋    ⭾    ⎀    ⏎    @undo @:   1    2    3    @;   _
-  _    _    _              0               XX   _    _
+  _           ⇞     ⌫     ▲     ⌦     ⇟     XX    XX    XX    XX    XX    XX    XX
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _           ↖     ◀     ▼     ▶     ↘     XX    lsft  lctl  lalt  lmet  XX    _     _
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _     XX    ⎋     ⭾     ⎀     ⏎     @udo  XX    XX    XX    XX    XX    XX
+;;_____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+  _     _     _                 _                 _     _     _
+;;_____ _____ _____             _____             _____ _____ _____
 )
+
+;;(deflayer template
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+;;_____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+;;_____ _____ _____             _____             _____ _____ _____
+;;)
