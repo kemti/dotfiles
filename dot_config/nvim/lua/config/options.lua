@@ -3,4 +3,7 @@
 -- Add any additional options here
 
 vim.o.shell = "nu"
+vim.o.shellcmdflag = "-c"
+vim.o.shellquote = ""
+vim.o.shellxquote = ""
 vim.o.guifont = "JetBrainsMono Nerd Font Mono:h12"
