@@ -1,4 +1,5 @@
-
+# PATH ------------------------------------------------------------------------
+# $env.Path = ($env.Path | split row (char esep) | prepend "C:/Users/Tim/.config/carapace/bin")
 
 # COMPLETERS ------------------------------------------------------------------
 
