@@ -14,11 +14,8 @@ end
 -- do not check for updates
 config.check_for_updates = false
 
-{{ if eq .chezmoi.os "windows" }}
 -- set shell
--- config.default_prog = { "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" }
 config.default_prog = { "nu" }
-{{ end }}
 
 -------------------------------------------------------------------------------
 -- COLORS & APPEREANCE
