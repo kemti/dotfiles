@@ -1,0 +1,198 @@
+(defcfg
+  process-unmapped-keys yes 
+  windows-altgr cancel-lctl-press
+)
+
+(defvar
+  ;; Note: consider using different time values for your different fingers.
+  ;; For example, your pinkies might be slower to release keys and index
+  ;; fingers faster.
+  tap-time 200
+  hold-time 150
+
+  left-hand-keys (
+    q w e r t
+    a s d f g
+    z x c v b
+  )
+  right-hand-keys (
+    y u i o p
+    h j k l ;
+    n m , . /
+  )
+)
+
+(deflocalkeys-win
+  <    226
+  ^    220
+  ´    221
+)
+
+(deflocalkeys-linux
+  <    86
+  ^    41
+  ´    13
+)
+
+(defsrc
+;;`         1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab       q    w    e    r    t    y    u    i    o    p    [    ]
+  caps      a    s    d    f    g    h    j    k    l    ;    '    \    ret
+  lsft <    z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(deffakekeys
+  to-base (layer-switch base)
+)
+
+(defalias
+  tap (multi
+    (layer-switch basenomods)
+    (on-idle-fakekey to-base tap 20)
+  )
+
+  ;; home row mod
+  mt_a (tap-hold-release-keys $tap-time $hold-time (multi a @tap) lmet $left-hand-keys)
+  mt_s (tap-hold-release-keys $tap-time $hold-time (multi s @tap) lalt $left-hand-keys)
+  mt_d (tap-hold-release-keys $tap-time $hold-time (multi d @tap) lctl $left-hand-keys)
+  mt_f (tap-hold-release-keys $tap-time $hold-time (multi f @tap) lsft $left-hand-keys)
+  mt_j (tap-hold-release-keys $tap-time $hold-time (multi j @tap) rsft $right-hand-keys)
+  mt_k (tap-hold-release-keys $tap-time $hold-time (multi k @tap) rctl $right-hand-keys)
+  mt_l (tap-hold-release-keys $tap-time $hold-time (multi l @tap) ralt $right-hand-keys)
+  mt_ö (tap-hold-release-keys $tap-time $hold-time (multi ; @tap) rmet $right-hand-keys)
+
+  ;; layer switching
+  syr (layer-while-held syr)
+  syl (layer-while-held syl)
+  num (layer-while-held num)
+  nav (layer-while-held nav)
+  
+  ;; utils
+  y z
+  z y
+  - /
+  cw (caps-word 2000)
+  udo C-z
+
+  ;; umlaute etc.
+  ä '
+  ö ;
+  ü [
+  ß -
+  # \
+
+  ;; shifted german keys
+  ! S-1
+  ˝ S-2  ;; unicode 02DD ˝ look-a-like is used because @" is no valid alias, to be displayed correctly
+         ;; in console requires a font that can - e.g. cascadia
+  § S-3
+  $ S-4
+  % S-5
+  & S-6
+  / S-7
+  ﴾ S-8  ;; unicode FD3E ﴾ look-a-like is used because @( is no valid alias, to be displayed correctly...
+  ﴿ S-9  ;; unicode FD3F ﴿ look-a-like is used because @) is no valid alias, to be displayed correctly...
+  = S-0
+  ? S--
+  * S-]
+  ' S-\
+  ; S-,
+  : S-.
+  _ S-/
+  > S-<
+  < <   ;; not really needed but having @< and @> looks consistent
+
+  ;; AltGr german keys
+  ~ RA-]
+  \ RA--
+  | RA-<
+  } RA-0
+  { RA-7
+  ] RA-9
+  [ RA-8
+  € RA-e
+  @ RA-q
+  ² RA-2
+  ³ RA-3
+  µ RA-m
+	
+  ;; change dead keys in normal keys
+  ´ (macro ´   spc)  ;; ´
+  ` (macro S-´ spc)  ;; `
+  ^ (macro ^   spc)  ;; ^ = \ - shifting @^ will produce an incorrect space now
+  ° S-\
+)
+
+(deflayer base
+  tab         q     w     e     r     t     @z    u     i     o     p     @ü     +
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  @syr        @mt_a @mt_s @mt_d @mt_f g     h     @mt_j @mt_k @mt_l @mt_ö @ä     @syl  ret
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  lsft  @num  @y    x     c     v     b     n     m     ,     .     @-    rsft
+;;_____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+  lctl  lmet  lalt              spc               @nav  rmet  rctl
+;;_____ _____ _____             _____             _____ _____ _____
+)
+
+(deflayer basenomods
+  tab         q     w     e     r     t     @z    u     i     o     p     @ü    +
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  @syr        a     s     d     f     g     h     j     k     l     @ö    @ä    @syl ret
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  lsft  @num  @y    x     c     v     b     n     m     ,     .     @-    rsft
+;;_____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+  lctl  lmet  lalt              spc               @nav  rmet  rctl
+;;_____ _____ _____             _____             _____ _____ _____
+)
+
+(deflayer syl
+  XX          @cw   @_    @[    @]    @^    XX    XX    XX    XX    XX    XX    XX
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _           @\    @/    @{    @}    @*    XX    lsft  lctl  lalt  lmet  XX    _     _
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _     XX    @#    @$    @|    @~    @`    XX    XX    XX    XX    XX    XX
+;;_____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _     _     _                 _                 _     _     _
+;;_____ _____ _____             _____             _____ _____ _____
+)
+
+(deflayer syr
+  _           XX    XX    XX    XX    XX    @!    @<    @>    @=    @&    XX    XX
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _           lmet  lalt  lctl  lsft  XX    @?    @﴾    @﴿    @-    @:    @@    _     _
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _     XX    XX    XX    XX    XX    XX    +     @%    @˝    @'    @;    XX
+;;_____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+  _     _     _                 _                 _     _     _
+;;_____ _____ _____             _____             _____ _____ _____
+)
+
+(deflayer num
+  _           XX    XX    XX    XX    XX    @*    7     8     9     +     @-    XX
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _           lmet  lalt  lctl  lsft  XX    @/    4     5     6     ,     .     _     _
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _     XX    XX    XX    XX    XX    XX    @:    1     2     3     @;    XX
+;;_____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+  _     _     _                 0                 _     _     _
+;;_____ _____ _____             _____             _____ _____ _____
+)
+
+(deflayer nav
+  _           ⇞     ⌫     ▲     ⌦     ⇟     XX    XX    XX    XX    XX    XX    XX
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _           ↖     ◀     ▼     ▶     ↘     XX    lsft  lctl  lalt  lmet  XX    _     _
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+  _     XX    ⎋     ⭾     ⎀     ⏎     @udo  XX    XX    XX    XX    XX    XX
+;;_____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+  _     _     _                 _                 _     _     _
+;;_____ _____ _____             _____             _____ _____ _____
+)
+
+;;(deflayer template
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+;;_____       _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+;;_____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+;;_____ _____ _____             _____             _____ _____ _____
+;;)
