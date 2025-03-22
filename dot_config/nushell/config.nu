@@ -4,8 +4,6 @@
 # COMPLETERS ------------------------------------------------------------------
 
 # CARAPACE
-$env.Path = ($env.Path | split row (char esep) | prepend "C:/Users/Tim/.config/carapace/bin")
-
 def --env get-env [name] { $env | get $name }
 def --env set-env [name, value] { load-env { $name: $value } }
 def --env unset-env [name] { hide-env $name }
