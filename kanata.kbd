@@ -8,7 +8,8 @@
   ;; For example, your pinkies might be slower to release keys and index
   ;; fingers faster.
   tap-time 200
-  hold-time 150
+  hold-time-slow 200
+  hold-time-fast 150
 
   left-hand-keys (
     q w e r t
@@ -23,18 +24,6 @@
 )
 
 (deflocalkeys-win
-  ü    186
-  +    187
-  #    191
-  ö    192
-  ß    219
-  ^    220
-  ´    221
-  ä    222
-  <    226
-)
-
-(deflocalkeys-linux
   ü    186
   +    187
   #    191
@@ -63,25 +52,45 @@
     (on-idle-fakekey to-base tap 20)
   )
 
-  ;; home row mod
-  a (tap-hold-release-keys $tap-time $hold-time (multi a @tap) lmet $left-hand-keys)
-  s (tap-hold-release-keys $tap-time $hold-time (multi s @tap) lalt $left-hand-keys)
-  d (tap-hold-release-keys $tap-time $hold-time (multi d @tap) lctl $left-hand-keys)
-  f (tap-hold-release-keys $tap-time $hold-time (multi f @tap) lsft $left-hand-keys)
-  j (tap-hold-release-keys $tap-time $hold-time (multi j @tap) rsft $right-hand-keys)
-  k (tap-hold-release-keys $tap-time $hold-time (multi k @tap) rctl $right-hand-keys)
-  l (tap-hold-release-keys $tap-time $hold-time (multi l @tap) ralt $right-hand-keys)
-  ö (tap-hold-release-keys $tap-time $hold-time (multi ö @tap) rmet $right-hand-keys)
+  ;; home row mod - no tap
+  a (tap-hold-release-keys $tap-time $hold-time-slow a lmet $left-hand-keys)
+  s (tap-hold-release-keys $tap-time $hold-time-slow s lalt $left-hand-keys)
+  d (tap-hold-release-keys $tap-time $hold-time-slow d lctl $left-hand-keys)
+  f (tap-hold-release-keys $tap-time $hold-time-fast f lsft $left-hand-keys)
+  j (tap-hold-release-keys $tap-time $hold-time-fast j rsft $right-hand-keys)
+  k (tap-hold-release-keys $tap-time $hold-time-slow k rctl $right-hand-keys)
+  l (tap-hold-release-keys $tap-time $hold-time-slow l ralt $right-hand-keys)
+  ö (tap-hold-release-keys $tap-time $hold-time-slow ö rmet $right-hand-keys)
 
-  ;; bottom row mods
-  ;;y (tap-hold-release-keys $tap-time $hold-time (multi y @tap) lmet $left-hand-keys)
-  ;;x (tap-hold-release-keys $tap-time $hold-time (multi x @tap) lalt $left-hand-keys)
-  ;;c (tap-hold-release-keys $tap-time $hold-time (multi c @tap) lctl $left-hand-keys)
-  ;;v (tap-hold-release-keys $tap-time $hold-time (multi v @tap) lsft $left-hand-keys)
-  ;;m (tap-hold-release-keys $tap-time $hold-time (multi m @tap) rsft $right-hand-keys)
-  ;;, (tap-hold-release-keys $tap-time $hold-time (multi , @tap) rctl $right-hand-keys)
-  ;;. (tap-hold-release-keys $tap-time $hold-time (multi . @tap) ralt $right-hand-keys)
-  ;;- (tap-hold-release-keys $tap-time $hold-time (multi - @tap) rmet $right-hand-keys)
+  ;; home row mod - tap
+  ;;a (tap-hold-release-keys $tap-time $hold-time-slow (multi a @tap) lmet $left-hand-keys)
+  ;;s (tap-hold-release-keys $tap-time $hold-time-slow (multi s @tap) lalt $left-hand-keys)
+  ;;d (tap-hold-release-keys $tap-time $hold-time-slow (multi d @tap) lctl $left-hand-keys)
+  ;;f (tap-hold-release-keys $tap-time $hold-time-fast (multi f @tap) lsft $left-hand-keys)
+  ;;j (tap-hold-release-keys $tap-time $hold-time-fast (multi j @tap) rsft $right-hand-keys)
+  ;;k (tap-hold-release-keys $tap-time $hold-time-slow (multi k @tap) rctl $right-hand-keys)
+  ;;l (tap-hold-release-keys $tap-time $hold-time-slow (multi l @tap) ralt $right-hand-keys)
+  ;;ö (tap-hold-release-keys $tap-time $hold-time-slow (multi ö @tap) rmet $right-hand-keys)
+
+  ;; bottom row mods - no tap
+  ;;y (tap-hold-release-keys $tap-time $hold-time-slow y lmet $left-hand-keys)
+  ;;x (tap-hold-release-keys $tap-time $hold-time-slow x lalt $left-hand-keys)
+  ;;c (tap-hold-release-keys $tap-time $hold-time-slow c lctl $left-hand-keys)
+  ;;v (tap-hold-release-keys $tap-time $hold-time-fast v lsft $left-hand-keys)
+  ;;m (tap-hold-release-keys $tap-time $hold-time-fast m rsft $right-hand-keys)
+  ;;, (tap-hold-release-keys $tap-time $hold-time-slow , rctl $right-hand-keys)
+  ;;. (tap-hold-release-keys $tap-time $hold-time-slow . ralt $right-hand-keys)
+  ;;- (tap-hold-release-keys $tap-time $hold-time-slow - rmet $right-hand-keys)
+
+  ;; bottom row mods - tap
+  ;;y (tap-hold-release-keys $tap-time $hold-time-slow (multi y @tap) lmet $left-hand-keys)
+  ;;x (tap-hold-release-keys $tap-time $hold-time-slow (multi x @tap) lalt $left-hand-keys)
+  ;;c (tap-hold-release-keys $tap-time $hold-time-slow (multi c @tap) lctl $left-hand-keys)
+  ;;v (tap-hold-release-keys $tap-time $hold-time-fast (multi v @tap) lsft $left-hand-keys)
+  ;;m (tap-hold-release-keys $tap-time $hold-time-fast (multi m @tap) rsft $right-hand-keys)
+  ;;, (tap-hold-release-keys $tap-time $hold-time-slow (multi , @tap) rctl $right-hand-keys)
+  ;;. (tap-hold-release-keys $tap-time $hold-time-slow (multi . @tap) ralt $right-hand-keys)
+  ;;- (tap-hold-release-keys $tap-time $hold-time-slow (multi - @tap) rmet $right-hand-keys)
 
 
   syr (layer-while-held syr)
