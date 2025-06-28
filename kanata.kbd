@@ -71,7 +71,7 @@
   j (tap-hold-release-keys $tap-time $hold-time (multi j @tap) rsft $right-hand-keys)
   k (tap-hold-release-keys $tap-time $hold-time (multi k @tap) rctl $right-hand-keys)
   l (tap-hold-release-keys $tap-time $hold-time (multi l @tap) ralt $right-hand-keys)
-  ö (tap-hold-release-keys $tap-time $hold-time (multi ; @tap) rmet $right-hand-keys)
+  ö (tap-hold-release-keys $tap-time $hold-time (multi ö @tap) rmet $right-hand-keys)
 
   ;; bottom row mods
   ;;y (tap-hold-release-keys $tap-time $hold-time (multi y @tap) lmet $left-hand-keys)
