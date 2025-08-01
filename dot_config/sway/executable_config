@@ -1,15 +1,46 @@
 include catppuccin-mocha 
 
-input type:keyboard {
-	xkb_layout de,de,eu
-	xkb_variant ,neo_qwertz,
+
+################################################################################
+# OUTPUT
+################################################################################
+
+# Left Monitor
+output DP-2 {
+  pos 0,0
+  mode 2560x1440@165.000Hz
 }
 
+# Right Monitor
+output DP-1 {
+  pos 2560,0
+  mode 2560x1440@165.000Hz
+}
+
+# Background
+output * bg /home/tim/.local/share/backgrounds/wallpaper.jpg fill
+
+
+################################################################################
+# INPUT
+################################################################################
+
+# Mouse
 input type:pointer {
 	natural_scroll disabled
 	accel_profile "flat"
 	pointer_accel 0.5
 }
+
+# Keyboard
+input type:keyboard {
+	xkb_layout de
+}
+
+
+################################################################################
+# Styling
+################################################################################
 
 # target                 title     bg    text   indicator  border
 client.focused           $lavender $base $text  $rosewater $lavender
@@ -21,90 +52,31 @@ client.background        $base
 
 gaps inner 10
 
-# bar
-# bar {
-#   colors {
-#     background         $base
-#     statusline         $text
-#     focused_statusline $text
-#     focused_separator  $base
-#     focused_workspace  $base $base $green
-#     active_workspace   $base $base $blue
-#     inactive_workspace $base $base $surface1
-#     urgent_workspace   $base $base $surface1
-#     binding_mode       $base $base $surface1
-#   }
-# }
 
-# bindsym $mod+0 input type:keyboard xkb_switch_layout next
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
+################################################################################
+# Variables
+################################################################################
 
-### Variables
-#
-# Logo key. Use Mod1 for Alt.
-set $mod Mod4
+# Logo key. (Mod1 = Alt, Mod4 = Super)
+set $mod Mod1
+
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
-# Recommends: foot
+
+# Terminal Emulator
 set $term wezterm
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
-# Recommends: rofi-wayland
-set $rofi_cmd rofi \
-        -terminal '$term'
-# Shows a combined list of the applications with desktop files and
-# executables from PATH.
-# TODO: add window with the next release of rofi-wayland
-set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
 
-### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-# Requires: desktop-backgrounds-compat, swaybg
-output * bg /home/tim/.local/share/backgrounds/wallpaper.jpg fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+# Application Launcher
+set $menu rofi -show combi -combi-modes drun#run#window -modes combi
 
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
 
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+################################################################################
+# Key Bindings
+################################################################################
 
-### Key bindings
 #
 # Basics:
 #
@@ -129,11 +101,12 @@ output * bg /home/tim/.local/share/backgrounds/wallpaper.jpg fill
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
 #
 # Moving around:
 #
     # Move your focus around
-    bindsym $mod+$left focus left
+
     bindsym $mod+$down focus down
     bindsym $mod+$up focus up
     bindsym $mod+$right focus right
@@ -153,6 +126,7 @@ output * bg /home/tim/.local/share/backgrounds/wallpaper.jpg fill
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
+
 #
 # Workspaces:
 #
@@ -166,7 +140,7 @@ output * bg /home/tim/.local/share/backgrounds/wallpaper.jpg fill
     bindsym $mod+7 workspace number 7
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
-    # bindsym $mod+0 workspace number 10
+    bindsym $mod+0 workspace number 10
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -178,8 +152,7 @@ output * bg /home/tim/.local/share/backgrounds/wallpaper.jpg fill
     bindsym $mod+Shift+8 move container to workspace number 8
     bindsym $mod+Shift+9 move container to workspace number 9
     bindsym $mod+Shift+0 move container to workspace number 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
+
 #
 # Layout stuff:
 #
@@ -205,6 +178,7 @@ output * bg /home/tim/.local/share/backgrounds/wallpaper.jpg fill
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
+
 #
 # Scratchpad:
 #
@@ -217,6 +191,7 @@ output * bg /home/tim/.local/share/backgrounds/wallpaper.jpg fill
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
+
 #
 # Resizing containers:
 #
@@ -240,13 +215,19 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+
 bindsym $mod+r mode "resize"
+
+
+################################################################################
+# Include System Config
+################################################################################
 
 # Include configs from 3 locations:
 #  - /usr/share/sway/config.d
 #  - /etc/sway/config.d
 #  - $XDG_CONFIG_HOME/sway/config.d ($HOME/.config/sway/config.d)
-#
+
 # If multiple directories contain the files with the same name, the later
 # directory takes precedence; `$XDG_CONFIG_HOME/sway/config.d/20-swayidle.conf`
 # will always be loaded instead of `/usr/share/sway/config.d/20-swayidle.conf`
@@ -262,5 +243,5 @@ bindsym $mod+r mode "resize"
 # Note the quoting, the $() and the arguments quoting. All the parts are equally
 # important to make the magic work. And if you want to learn the secret behind
 # the trick, it's all in the `wordexp(3)`.
-#
+
 include '$(/usr/libexec/sway/layered-include "/usr/share/sway/config.d/*.conf" "/etc/sway/config.d/*.conf" "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf")'
