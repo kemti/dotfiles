@@ -35,6 +35,18 @@
   <    226
 )
 
+(deflocalkeys-linux
+  ü    26
+  +    27
+  #    43
+  ö    39
+  ß    12
+  ^    41
+  ´    13
+  ä    40
+  <    86
+)
+
 (defsrc
   tab       q    w    e    r    t    z    u    i    o    p    ü    +
   caps      a    s    d    f    g    h    j    k    l    ö    ä    #    ret
@@ -126,7 +138,7 @@
   \  RA-ß
   |  RA-<
   ~  RA-+
-  `  S-´
+  `  (macro S-´ spc)
   udo C-z
 )
 
