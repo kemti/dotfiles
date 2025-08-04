@@ -17,6 +17,9 @@ output DP-2 {
   mode 2560x1440@180.002Hz
 }
 
+# Put workspace on the left monitor
+workspace 1 output DP-1
+
 # Background
 output * bg /usr/share/backgrounds/under-the-rain-by-gene-raz-von-edler.png fill
 
