@@ -1,6 +1,4 @@
 {{ if ne .chezmoi.os "windows" }}
-.config/oh-my-posh/**/*
-Documents/WindowsPowerShell/**/*
 AppData/**/*
 .ideavimrc
 .vsvimrc
@@ -8,6 +6,7 @@ AppData/**/*
 
 {{ if ne .chezmoi.os "linux" }}
 .config/rofi/**/*
+.config/sddm/**/*
 .config/sway/**/*
 .config/swaylock/**/*
 .config/waybar/**/*
