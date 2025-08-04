@@ -8,17 +8,23 @@ include catppuccin-mocha
 # Left Monitor
 output DP-1 {
   pos 0,0
-  mode 2560x1440@180.002Hz
+  mode 2560x1440@170.002Hz
 }
 
 # Right Monitor
 output DP-2 {
   pos 2560,0
-  mode 2560x1440@180.002Hz
+  mode 2560x1440@170.002Hz
 }
 
 # Put workspace on the left monitor
 workspace 1 output DP-1
+
+# Set the cursor to the middle of the left monitor
+exec swaymsg seat seat0 cursor set 1280 720
+
+# Focus the left monitor
+exec swaymsg focus output DP-1
 
 # Background
 output * bg /usr/share/backgrounds/under-the-rain-by-gene-raz-von-edler.png fill
