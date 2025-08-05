@@ -30,15 +30,6 @@ zoxide init nushell | save -f ($path_autoload | path join "zoxide.nu")
 # init carapace
 carapace _carapace nushell | save -f ($path_autoload | path join "carapace.nu")
 
-# cargo
-source $"($nu.home-path)/.cargo/env.nu"
-
-# fmn
-if not (which fnm | is-empty) {
-    ^fnm env --json | from json | load-env
-
-    $env.PATH = $env.PATH | prepend ($env.FNM_MULTISHELL_PATH | path join (if $nu.os-info.name == 'windows' {''} else {'bin'}))
-}
 
 ################################################################################
 # CONFIG
