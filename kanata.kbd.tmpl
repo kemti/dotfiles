@@ -23,6 +23,7 @@
   )
 )
 
+{{ if eq .chezmoi.os "windows" }}
 (deflocalkeys-win
   ü    186
   +    187
@@ -34,7 +35,9 @@
   ä    222
   <    226
 )
+{{ end }}
 
+{{ if eq .chezmoi.os "linux" }}
 (deflocalkeys-linux
   z    21
   y    44
@@ -49,6 +52,7 @@
   <    86
   -    53
 )
+{{ end }}
 
 (defsrc
   tab       q    w    e    r    t    z    u    i    o    p    ü    +
