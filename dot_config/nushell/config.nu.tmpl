@@ -31,6 +31,11 @@ zoxide init nushell | save -f ($path_autoload | path join "zoxide.nu")
 carapace _carapace nushell | save -f ($path_autoload | path join "carapace.nu")
 
 
+# jj
+if not (which jj | is-empty) {
+    jj util completion nushell | save -f ($path_autoload | path join "completions-jj.nu")
+}
+
 ################################################################################
 # CONFIG
 ################################################################################
