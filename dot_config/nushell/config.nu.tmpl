@@ -31,7 +31,7 @@ zoxide init nushell | save -f ($path_autoload | path join "zoxide.nu")
 carapace _carapace nushell | save -f ($path_autoload | path join "carapace.nu")
 
 # cargo
-source $"($nu.home-path)/.cargo/env.nu"
+source $"($nu.home-dir)/.cargo/env.nu"
 
 # fmn
 if not (which fnm | is-empty) {
