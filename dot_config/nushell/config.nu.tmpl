@@ -45,6 +45,11 @@ if not (which jj | is-empty) {
     jj util completion nushell | save -f ($path_autoload | path join "completions-jj.nu")
 }
 
+# atuin
+if not (which atuin | is-empty) {
+    atuin init nu | save -f ($path_autoload | path join "atuin.nu")
+}
+
 ################################################################################
 # ALIAS
 ################################################################################
