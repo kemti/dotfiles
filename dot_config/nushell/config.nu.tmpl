@@ -1,54 +1,66 @@
+let path_vendor_autoload = $nu.data-dir | path join "vendor/autoload"
+mkdir $path_vendor_autoload
+
 ################################################################################
-# INIT
+# TOOLS
 ################################################################################
 
-let path_autoload = $nu.data-dir | path join "vendor/autoload/"
-mkdir $path_autoload
+# atuin
+if not (which atuin | is-empty) {
+    atuin init nu | save -f ($path_vendor_autoload | path join "atuin.nu")
+}
 
+# carapace
+if not (which carapace | is-empty) {
+  carapace _carapace nushell | save -f ($path_vendor_autoload | path join "carapace.nu")
+}
+
+# cargo
+let path_cargo_env_nu = $nu.home-dir | path join ".cargo/env.nu"
+if ($path_cargo_env_nu | path exists) {
+  cp -u $path_cargo_env_nu ($path_vendor_autoload | path join "cargo.nu")
+}
+
+# jj
+if not (which jj | is-empty) {
+    jj util completion nushell | save -f ($path_vendor_autoload | path join "completions-jj.nu")
+}
+
+# starship
+if not (which starship | is-empty) {
+  starship init nu | save -f ($path_vendor_autoload | path join "starship.nu")
+}
+
+# zoxide
+if not (which zoxide | is-empty) {
+  zoxide init nushell | save -f ($path_vendor_autoload | path join "zoxide.nu")
+}
+
+################################################################################
+# ENV
+################################################################################
+
+# default editor
+$env.EDITOR = "nvim"
+$env.VISUAL = "nvim"
+
+# local binaries
+$env.path ++= [($nu.home-dir | path join ".local/bin")]
+
+# carapace
+$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
+
+# fzf
+$env.FZF_DEFAULT_OPTS = '--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8'
+
+# yazi
+$env.YAZI_CONFIG_HOME = $nu.home-dir | path join ".config/yazi"
 
 ################################################################################
 # THEME
 ################################################################################
 
 source ($nu.default-config-dir | path join catppuccin-mocha.nu)
-
-
-################################################################################
-# PROMPT (Starship)
-################################################################################
-
-starship init nu | save -f ($path_autoload | path join "starship.nu")
-
-
-################################################################################
-# TOOLS
-################################################################################
-
-# init zoxide
-zoxide init nushell | save -f ($path_autoload | path join "zoxide.nu")
-
-# init carapace
-carapace _carapace nushell | save -f ($path_autoload | path join "carapace.nu")
-
-# cargo
-source $"($nu.home-dir)/.cargo/env.nu"
-
-# fmn
-if not (which fnm | is-empty) {
-    ^fnm env --json | from json | load-env
-
-    $env.PATH = $env.PATH | prepend ($env.FNM_MULTISHELL_PATH | path join (if $nu.os-info.name == 'windows' {''} else {'bin'}))
-}
-
-# jj
-if not (which jj | is-empty) {
-    jj util completion nushell | save -f ($path_autoload | path join "completions-jj.nu")
-}
-
-# atuin
-if not (which atuin | is-empty) {
-    atuin init nu | save -f ($path_autoload | path join "atuin.nu")
-}
 
 ################################################################################
 # ALIAS
@@ -61,11 +73,7 @@ alias lg = lazygit
 ################################################################################
 
 $env.config = {
-  show_banner: false # true or false to enable or disable the welcome banner at startup
+  show_banner: false
   edit_mode: "vi"
   buffer_editor: "nvim"
-  shell_integration: {
-      # This is used to enable terminals to know where the prompt is, the command is, where the command finishes, and where the output of the command is
-      osc133: false
-  }
 }
