@@ -21,6 +21,13 @@ if ($path_cargo_env_nu | path exists) {
   cp -u $path_cargo_env_nu ($path_vendor_autoload | path join "cargo.nu")
 }
 
+# fnm
+if not (which fnm | is-empty) {
+  ^fnm env --json | from json | load-env
+
+  $env.PATH = $env.PATH | prepend ($env.FNM_MULTISHELL_PATH | path join (if $nu.os-info.name == 'windows' {''} else {'bin'}))
+}
+
 # jj
 if not (which jj | is-empty) {
     jj util completion nushell | save -f ($path_vendor_autoload | path join "completions-jj.nu")
